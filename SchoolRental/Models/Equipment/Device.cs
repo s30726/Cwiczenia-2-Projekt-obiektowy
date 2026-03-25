@@ -1,21 +1,21 @@
 ﻿namespace SchoolRental.Models.Equipment;
 
-public class Equipment
+public class Device
 {
     public Guid Id { get; private set; }
     public string Name { get; set; }
-    //public EquipmentStatus Status { get; set; }
+    public DeviceStatus Status { get; set; }
 
-    protected Equipment(string name)
+    protected Device(string name)
     {
         Id = Guid.NewGuid();
         Name = name;
-        //Status = EquipmentStatus.Available;
+        Status = DeviceStatus.Available;
     }
 
     public override string ToString()
     {
-        return $"Name: {Name} | Id: {Id}";
+        return $"Id: {Id} | Name: {Name}";
     }
     
 }

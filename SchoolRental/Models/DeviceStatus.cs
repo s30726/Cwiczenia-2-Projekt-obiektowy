@@ -1,6 +1,9 @@
-﻿namespace SchoolRental.Models.Equipment;
+﻿namespace SchoolRental.Models;
 
 public enum DeviceStatus
 {
+    Available,
+    Unavailable,
+    Rented,
     
 }
