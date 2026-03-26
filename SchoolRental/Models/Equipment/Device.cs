@@ -13,7 +13,7 @@ public class Device
     {
         Id = Guid.NewGuid();
         Name = name;
-        MarkAsUnavailable();
+        MarkAsAvailable();
     }
 
     public override string ToString()
