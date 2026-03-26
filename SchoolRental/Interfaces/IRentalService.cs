@@ -8,7 +8,7 @@ public interface IRentalService
 {
     Rental RentDevice(User user, Device device, int days);
     void ReturnDevice(Rental rental);
-    
+    List<Rental> GetAllRentals();
     List<Rental> GetActiveRentals(User user);
     List<Rental> GetOverdueRentals();
     
