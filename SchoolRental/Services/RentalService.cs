@@ -25,6 +25,7 @@ public class RentalService : IRentalService
         
         if (activeCount >= user.GetMaxActiveRentals())
             throw new Exception("User exceeds maximum allowed rentals");
+        
         var rental = new Rental(user, device, days);
         
         device.MarkAsRented();
@@ -37,10 +38,17 @@ public class RentalService : IRentalService
     {
         if (rental.IsReturned)
             throw new Exception("Already returned");
-        
+
+        rental.MarkAsReturned();
+        rental.Device.MarkAsAvailable();
         var penalty = _penaltyPolicy.CalculatePenalty(rental);
-        rental.Return(penalty);
+        rental.ApplyPenalty(penalty);
         
+    }
+
+    public List<Rental> GetAllRentals()
+    {
+        return _rentals;
     }
 
     public List<Rental> GetActiveRentals(User user)
