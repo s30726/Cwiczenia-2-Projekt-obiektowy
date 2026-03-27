@@ -13,12 +13,12 @@ public class Device
     {
         Id = Guid.NewGuid();
         Name = name;
-        MarkAsUnavailable();
+        MarkAsAvailable();
     }
 
     public override string ToString()
     {
-        return $"Id: {Id} | Name: {Name}";
+        return $"Id: {Id} | {Status} | Name: {Name}";
     }
     
 }
