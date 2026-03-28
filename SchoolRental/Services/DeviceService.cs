@@ -22,9 +22,4 @@ public class DeviceService
         return _devices.Where(d => d.Status == DeviceStatus.Available).ToList();
     }
     
-
-    public Device? GetById(Guid id)
-    {
-        return _devices.FirstOrDefault(d => d.Id == id);
-    }
 }

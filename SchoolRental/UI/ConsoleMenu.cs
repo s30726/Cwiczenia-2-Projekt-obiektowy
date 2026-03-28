@@ -69,16 +69,21 @@ public class ConsoleMenu
             .GetProperty("RentalEndDate")!
             .SetValue(rental2, DateTime.Now.AddDays(-2));
 
-        Console.WriteLine("\nReturn not on time: ");
-        _rentalService.ReturnDevice(rental2);
-        Console.WriteLine(rental2);
-
 
         Console.WriteLine("\nFinal report: ");
         var report = _reportService.GenerateReport(_deviceService.GetAll(), _rentalService.GetAllRentals());
-
+        
         Console.WriteLine(report);
 
+        Console.WriteLine("\nOverdue report");
+        var overdue = _reportService.GenerateOverdueRentalsReport(_rentalService.GetOverdueRentals());
+        Console.WriteLine(overdue);
+        
+        Console.WriteLine("\nReturn not on time: ");
+        _rentalService.ReturnDevice(rental2);
+        Console.WriteLine(rental2);
+        
+        
     }
     
     public void InteractiveConsole()
@@ -256,12 +261,37 @@ public class ConsoleMenu
 
     private void ShowReport()
     {
-        var report = _reportService.GenerateReport(
-            _deviceService.GetAll(),
-            _rentalService.GetAllRentals()
-        );
+        Console.WriteLine("""
+                          ===== REPORTS =====
+                          1. Summary report
+                          2. Available devices
+                          3. Overdue rentals
+                          ===================
+                          """);
 
-        Console.WriteLine(report);
+        var choice = Console.ReadLine();
+
+        var devices = _deviceService.GetAll();
+        var rentals = _rentalService.GetAllRentals();
+
+        switch (choice)
+        {
+            case "1":
+                Console.WriteLine(_reportService.GenerateReport(devices, rentals));
+                break;
+
+            case "2":
+                Console.WriteLine(_reportService.GenerateAvailableDevicesReport(devices));
+                break;
+
+            case "3":
+                Console.WriteLine(_reportService.GenerateOverdueRentalsReport(rentals));
+                break;
+
+            default:
+                Console.WriteLine("Invalid option");
+                break;
+        }
     }
     
 

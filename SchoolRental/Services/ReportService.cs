@@ -11,7 +11,6 @@ public class ReportService
         var available = devices.Count(d => d.Status == DeviceStatus.Available);
         var rented = devices.Count(d => d.Status == DeviceStatus.Rented);
         var unavailable = devices.Count(d => d.Status == DeviceStatus.Unavailable);
-
         var overdue = rentals.Count(r => r.IsOverdue);
         
         return $"""
@@ -20,9 +19,27 @@ public class ReportService
                 Available: {available}
                 Rented: {rented}
                 Unavailable: {unavailable}
-
                 Overdue rentals: {overdue}
                 =================
                 """;
+    }
+    
+    public string GenerateAvailableDevicesReport(List<Device> devices)
+    {
+        var availableDevices = devices
+            .Where(d => d.Status == DeviceStatus.Available);
+
+        return "===== AVAILABLE DEVICES =====\n" +
+               string.Join("\n", availableDevices) +
+               "\n=============================";
+    }
+    
+    public string GenerateOverdueRentalsReport(List<Rental> rentals)
+    {
+        var overdue = rentals.Where(r => r.IsOverdue);
+
+        return "===== OVERDUE RENTALS =====\n" +
+               string.Join("\n", overdue) +
+               "\n==========================";
     }
 }
