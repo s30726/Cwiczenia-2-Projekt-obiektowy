@@ -18,7 +18,7 @@ public class Device
 
     public override string ToString()
     {
-        return $"Id: {Id} | Name: {Name}";
+        return $"Id: {Id} | {Status} | Name: {Name}";
     }
     
 }

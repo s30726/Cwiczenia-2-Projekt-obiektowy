@@ -26,8 +26,6 @@ public class Rental
         RentalDate = DateTime.Now;
         RentalEndDate = RentalDate.AddDays(rentalDays);
     }
-    
-
     public void MarkAsReturned()
     {
         ReturnDate = DateTime.Now;
@@ -41,6 +39,6 @@ public class Rental
     public override string ToString()
     {
         return
-            $"Id: {Id} | User: {User.FirstName} {User.LastName} | Device:  {Device.Name} | Due: {RentalEndDate} | Returned: {ReturnDate} | Penalty: {Penalty}$\n";
+            $"Id: {Id} | User: {User.FirstName} {User.LastName} | Device:  {Device.Name} | Due: {RentalEndDate} | Returned: {ReturnDate} | Penalty: {Penalty} $\n";
     }
 }
